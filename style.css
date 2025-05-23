@@ -1,0 +1,227 @@
+
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+    body {
+      font-family: sans-serif;
+      color: white;
+      background-color: #222;
+    }
+    nav {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      background-color: white;
+      padding: 15px 20px;
+      flex-wrap: wrap;
+    }
+    .logo { font-size: 24px; font-weight: bold; color: red; }
+    .nav-links {
+      display: flex;
+      gap: 15px;
+      flex-wrap: wrap;
+    }
+    .nav-links a {
+      text-decoration: none;
+      color: #333;
+      font-weight: bold;
+    }
+    .nav-links a:hover { color: #ff4f5a; }
+    .hero {
+      height: 100vh;
+      background-image: url('https://images.unsplash.com/photo-1600891964599-f61ba0e24092');
+      background-size: cover;
+      background-position: center;
+      background-repeat: no-repeat;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      text-align: center;
+      padding: 20px;
+      background-color: rgba(0,0,0,0.5);
+      background-blend-mode: darken;
+      opacity: 0;
+      transform: translateY(30px);
+      transition: opacity 0.8s ease, transform 0.8s ease;
+    }
+    .hero.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+    .hero h1 { font-size: 36px; margin-bottom: 20px; }
+    .hero p { font-size: 16px; margin-bottom: 30px; }
+    .buttons {
+      display: flex;
+      justify-content: center;
+    }
+    .buttons a button {
+      padding: 10px 20px;
+      border-radius: 20px;
+      border: 2px solid #ff4f5a;
+      font-size: 16px;
+      cursor: pointer;
+      background-color: transparent;
+      color: #ff4f5a;
+      transition: background-color 0.3s, color 0.3s;
+    }
+    .buttons a button:hover {
+      background-color: #ff4f5a;
+      color: white;
+    }
+    section {
+      opacity: 0;
+      transform: translateY(30px);
+      transition: opacity 0.8s ease, transform 0.8s ease;
+      max-width: 1000px;
+      margin: 60px auto;
+      padding: 20px;
+      border-radius: 12px;
+    }
+    section.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+    #about {
+      background-image: url('https://images.unsplash.com/photo-1504674900247-0877df9cc836');
+      background-size: cover;
+      background-position: center;
+      color: white;
+      padding: 80px 20px;
+    }
+    .about-overlay {
+      background-color: rgba(0,0,0,0.6);
+      padding: 50px 20px;
+      border-radius: 12px;
+    }
+    .about-content h2 {
+      font-size: 32px;
+      margin-bottom: 20px;
+      text-align: center;
+    }
+    .about-content p {
+      font-size: 16px;
+      line-height: 1.8;
+      text-align: center;
+    }
+    #menu {
+      background-color: #111;
+      color: white;
+      padding-bottom: 60px;
+    }
+    #menu h2 {
+      font-size: 28px;
+      margin-bottom: 25px;
+      text-align: center;
+      color: #ff4f5a;
+    }
+    .menu-items {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 20px;
+      justify-content: center;
+    }
+    .menu-item {
+      background-color: #222;
+      border-radius: 12px;
+      width: 150px;
+      box-shadow: 0 0 10px rgba(255, 79, 90, 0.4);
+      text-align: center;
+      color: #ff4f5a;
+      font-weight: bold;
+      padding: 20px 10px;
+    }
+    .menu-item img {
+      width: 100%;
+      border-radius: 10px;
+      margin-bottom: 10px;
+    }
+    #team {
+      background-color: #333;
+      color: white;
+      padding: 40px 20px;
+      border-radius: 12px;
+      max-width: 600px;
+      margin: 60px auto;
+      text-align: center;
+    }
+    #team h2 {
+      font-size: 28px;
+      margin-bottom: 30px;
+      color: #ff4f5a;
+    }
+    #team ul {
+      list-style: none;
+      font-weight: bold;
+      font-size: 16px;
+      line-height: 2;
+      text-align: left;
+      padding-left: 0;
+    }
+    #team ul li {
+      margin-bottom: 8px;
+    }
+    #team ul li span.nim {
+      color: #ff4f5a;
+      font-weight: bolder;
+      margin-left: 6px;
+    }
+    #team.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+    #contact {
+      background-color: #111;
+      color: white;
+      padding: 40px 20px;
+      border-radius: 12px;
+      max-width: 600px;
+      margin: 60px auto 100px;
+      text-align: center;
+    }
+    #contact h2 {
+      font-size: 28px;
+      margin-bottom: 25px;
+      color: #ff4f5a;
+    }
+    #contact .contact-item {
+      margin: 15px 0;
+      font-size: 18px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      gap: 10px;
+    }
+    #contact .contact-item a {
+      color: white;
+      text-decoration: none;
+      font-weight: bold;
+    }
+    #contact .contact-item a:hover {
+      color: #ff4f5a;
+    }
+    @media (max-width: 600px) {
+      nav {
+        flex-direction: column;
+        align-items: center;
+      }
+      .nav-links {
+        width: 100%;
+        justify-content: center;
+        margin-top: 10px;
+      }
+      .hero h1 { font-size: 26px; }
+      .hero p { font-size: 14px; }
+      .buttons a button {
+        width: 100%;
+        max-width: 200px;
+      }
+      .about-content h2 { font-size: 24px; }
+      .about-content p { font-size: 14px; }
+      .menu-items { gap: 15px; }
+      .menu-item {
+        width: 45%;
+        margin-bottom: 15px;
+      }
+      #team, #contact { max-width: 90%; }
+    }
+  

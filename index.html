@@ -1,0 +1,374 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Happy Tummy</title>
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" rel="stylesheet" />
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+    body {
+      font-family: sans-serif;
+      color: white;
+      background-color: #222;
+    }
+    nav {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      background-color: white;
+      padding: 15px 20px;
+      flex-wrap: wrap;
+    }
+    .logo { font-size: 24px; font-weight: bold; color: red; }
+    .nav-links {
+      display: flex;
+      gap: 15px;
+      flex-wrap: wrap;
+    }
+    .nav-links a {
+      text-decoration: none;
+      color: #333;
+      font-weight: bold;
+    }
+    .nav-links a:hover { color: #ff4f5a; }
+    .hero {
+      height: 100vh;
+      background-image: url('https://images.unsplash.com/photo-1600891964599-f61ba0e24092');
+      background-size: cover;
+      background-position: center;
+      background-repeat: no-repeat;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      text-align: center;
+      padding: 20px;
+      background-color: rgba(0,0,0,0.5);
+      background-blend-mode: darken;
+      opacity: 0;
+      transform: translateY(30px);
+      transition: opacity 0.8s ease, transform 0.8s ease;
+    }
+    .hero.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+    .hero h1 { font-size: 36px; margin-bottom: 20px; }
+    .hero p { font-size: 16px; margin-bottom: 30px; }
+    .buttons {
+      display: flex;
+      justify-content: center;
+    }
+    .buttons a button {
+      padding: 10px 20px;
+      border-radius: 20px;
+      border: 2px solid #ff4f5a;
+      font-size: 16px;
+      cursor: pointer;
+      background-color: transparent;
+      color: #ff4f5a;
+      transition: background-color 0.3s, color 0.3s;
+    }
+    .buttons a button:hover {
+      background-color: #ff4f5a;
+      color: white;
+    }
+    section {
+      opacity: 0;
+      transform: translateY(30px);
+      transition: opacity 0.8s ease, transform 0.8s ease;
+      max-width: 1000px;
+      margin: 60px auto;
+      padding: 20px;
+      border-radius: 12px;
+    }
+    section.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+    #about {
+      background-image: url('https://images.unsplash.com/photo-1504674900247-0877df9cc836');
+      background-size: cover;
+      background-position: center;
+      color: white;
+      padding: 80px 20px;
+    }
+    .about-overlay {
+      background-color: rgba(0,0,0,0.6);
+      padding: 50px 20px;
+      border-radius: 12px;
+    }
+    .about-content h2 {
+      font-size: 32px;
+      margin-bottom: 20px;
+      text-align: center;
+    }
+    .about-content p {
+      font-size: 16px;
+      line-height: 1.8;
+      text-align: center;
+    }
+    #menu {
+      background-color: #111;
+      color: white;
+      padding-bottom: 60px;
+    }
+    #menu h2 {
+      font-size: 28px;
+      margin-bottom: 25px;
+      text-align: center;
+      color: #ff4f5a;
+    }
+    .menu-items {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 20px;
+      justify-content: center;
+    }
+    .menu-item {
+      background-color: #222;
+      border-radius: 12px;
+      width: 150px;
+      box-shadow: 0 0 10px rgba(255, 79, 90, 0.4);
+      text-align: center;
+      color: #ff4f5a;
+      font-weight: bold;
+      padding: 20px 10px;
+    }
+    .menu-item img {
+      width: 100%;
+      border-radius: 10px;
+      margin-bottom: 10px;
+    }
+    #team {
+      background-color: #333;
+      color: white;
+      padding: 40px 20px;
+      border-radius: 12px;
+      max-width: 600px;
+      margin: 60px auto;
+      text-align: center;
+    }
+    #team h2 {
+      font-size: 28px;
+      margin-bottom: 30px;
+      color: #ff4f5a;
+    }
+    #team ul {
+      list-style: none;
+      font-weight: bold;
+      font-size: 16px;
+      line-height: 2;
+      text-align: left;
+      padding-left: 0;
+    }
+    #team ul li {
+      margin-bottom: 8px;
+    }
+    #team ul li span.nim {
+      color: #ff4f5a;
+      font-weight: bolder;
+      margin-left: 6px;
+    }
+    #team.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+    #contact {
+      background-color: #111;
+      color: white;
+      padding: 40px 20px;
+      border-radius: 12px;
+      max-width: 600px;
+      margin: 60px auto 100px;
+      text-align: center;
+    }
+    #contact h2 {
+      font-size: 28px;
+      margin-bottom: 25px;
+      color: #ff4f5a;
+    }
+    #contact .contact-item {
+      margin: 15px 0;
+      font-size: 18px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      gap: 10px;
+    }
+    #contact .contact-item a {
+      color: white;
+      text-decoration: none;
+      font-weight: bold;
+    }
+    #contact .contact-item a:hover {
+      color: #ff4f5a;
+    }
+    @media (max-width: 600px) {
+      nav {
+        flex-direction: column;
+        align-items: center;
+      }
+      .nav-links {
+        width: 100%;
+        justify-content: center;
+        margin-top: 10px;
+      }
+      .hero h1 { font-size: 26px; }
+      .hero p { font-size: 14px; }
+      .buttons a button {
+        width: 100%;
+        max-width: 200px;
+      }
+      .about-content h2 { font-size: 24px; }
+      .about-content p { font-size: 14px; }
+      .menu-items { gap: 15px; }
+      .menu-item {
+        width: 45%;
+        margin-bottom: 15px;
+      }
+      #team, #contact { max-width: 90%; }
+    }
+  </style>
+</head>
+<body>
+  <nav>
+    <div class="logo">Happy <span style="color: black;">tummy</span></div>
+    <div class="nav-links">
+      <a href="#hero">Home</a>
+      <a href="#about">About</a>
+      <a href="#menu">Menu</a>
+      <a href="#team">Our Team</a>
+      <a href="#contact">Contact</a>
+    </div>
+  </nav>
+
+  <div id="hero" class="hero visible">
+    <h1>Best food for your taste</h1>
+    <p>Cobain makanan enak banget dan bikin momen bareng jadi gak terlupakan,<br>di tempat yang super cozy dan friendly!</p>
+    <div class="buttons">
+      <a href="#menu"><button class="menu">Explore Menu</button></a>
+    </div>
+  </div>
+
+  <section id="about" class="visible">
+    <div class="about-overlay">
+      <div class="about-content">
+        <h2>About Us</h2>
+        <p>
+          Di Happy Tummy, kami bukan cuma jualan makanan — kami kasih pengalaman.
+          Dari makanan kekinian sampai yang klasik, semua dibuat dari bahan berkualitas dan cinta.
+          Tempat ini cocok banget buat nongkrong bareng temen, quality time bareng keluarga,
+          atau me time sambil ngemil enak.<br><br>
+          Misi kami simpel: bikin perut kenyang dan hati senang. Gak perlu mahal buat nikmatin makanan enak.
+          Yuk, cobain langsung dan jadi bagian dari <strong>#TeamHappyTummy</strong>!
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <section id="menu" class="visible">
+    <h2>Menu Makanan</h2>
+    <div class="menu-items">
+      <div class="menu-item">
+        <a href="https://postimg.cc/r0fM371s" target="_blank">
+          <img src="https://i.postimg.cc/gjWjXWrV/27bf6e38a69ec4fc14d1dce5f43e81e0.jpg" alt="Seblak" />
+        </a>
+        <p>Seblak</p>
+      </div>
+      <div class="menu-item">
+        <a href="https://postimg.cc/Hcym63Y8" target="_blank">
+          <img src="https://i.postimg.cc/XJ2v7DtL/a92506463ed07017c8aeabc4f1622130.jpg" alt="Bakso" />
+        </a>
+        <p>Bakso</p>
+      </div>
+      <div class="menu-item">
+        <a href="https://postimg.cc/jwpxTmgh" target="_blank">
+          <img src="https://i.postimg.cc/zvBVC1T4/559d34965d9989abc1b0b0e318c1f447.jpg" alt="Mie Ayam" />
+        </a>
+        <p>Mie Ayam</p>
+      </div>
+      <div class="menu-item">
+        <a href="https://postimg.cc/3WKfSdft" target="_blank">
+          <img src="https://i.postimg.cc/jqNVjfHY/174f19dc0553937556157b161dc38757.jpg" alt="Pecel Lele" />
+        </a>
+        <p>Pecel Lele</p>
+      </div>
+    </div>
+
+    <h2>Menu Minuman</h2>
+    <div class="menu-items">
+      <div class="menu-item">
+        <a href="https://postimg.cc/JzRqHpnJ" target="_blank">
+          <img src="https://i.postimg.cc/JzRqHpnJ/6c6a34060b43b6957254f55361c73f80.jpg" alt="Kopi Hitam" />
+        </a>
+        <p>Kopi Hitam</p>
+      </div>
+      <div class="menu-item">
+        <a href="https://postimg.cc/vgVbZyNN" target="_blank">
+          <img src="https://i.postimg.cc/tTrTDCtp/72901880d291207c29e218208849ff32.jpg" alt="Es Teh Manis" />
+        </a>
+        <p>Es Teh Manis</p>
+      </div>
+      <div class="menu-item">
+        <a href="https://postimg.cc/qg26mHvw" target="_blank">
+          <img src="https://i.postimg.cc/9XnPQW36/674d4e4e25903bd97b4044e00199e617.jpg" alt="Jus Jeruk" />
+        </a>
+        <p>Jus Jeruk</p>
+      </div>
+      <div class="menu-item">
+        <a href="https://postimg.cc/wR9qfPw4" target="_blank">
+          <img src="https://i.postimg.cc/tJxsTGWb/f3f05b4fcd01009972135dd9dcd69ad1.jpg" alt="Iced Mocha" />
+        </a>
+        <p>Iced Mocha</p>
+      </div>
+    </div>
+  </section>
+
+  <section id="team" class="visible">
+  <h2>Our Team</h2>
+  <ul>
+    <li>Cantika Intan Zahra <span class="nim">(F0G024077)</span></li>
+    <li>Sucila Ramadhani <span class="nim">(F0G024082)</span></li>
+    <li>Ramadhani Mawar Dhiya <span class="nim">(F0G024089)</span></li>
+    <li>Flora Aprianti <span class="nim">(F0G024093)</span></li>
+    <li>Azzahra Salsabila <span class="nim">(F0G024095)</span></li>
+    <li>Anggraini Tri Putri <span class="nim">(F0G024097)</span></li>
+    <li>Cammellia Cahya Asita <span class="nim">(F0G024103)</span></li>
+    <li>Adhe Patricia <span class="nim">(F0G024104)</span></li>
+    <li>Ishinta Pamela <span class="nim">(F0G024110)</span></li>
+  </ul>
+</section>
+
+  <section id="contact" class="visible">
+  <h2>Contact Us</h2>
+  <div class="contact-item">
+    <i class="fab fa-whatsapp"></i>
+    <a href="https://wa.me/628533327784" target="_blank">+62 853-3327-784</a>
+  </div>
+  <div class="contact-item">
+    <i class="fab fa-instagram"></i>
+    <a href="https://www.instagram.com/adeptrcia?igsh=MTRuOXl5aG5oOG9jNw==" target="_blank">@adeptrcia</a>
+  </div>
+</section>
+
+  <script>
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('visible');
+        }
+      });
+    }, {
+      threshold: 0.1
+    });
+
+    document.querySelectorAll('.hero, section').forEach(el => {
+      el.classList.remove('visible'); // reset dulu
+      observer.observe(el);
+    });
+  </script>
+</body>
+</html>
